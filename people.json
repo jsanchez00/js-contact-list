@@ -1,0 +1,8 @@
+{"people": [
+  { "name":"Jordi", "surname": "Sanchez", "second-surname": "Marin",
+    "birthdate": "1990-11-18" },
+  { "name":"Laura", "surname": "Martinez",
+    "birthdate": "1991-2-20" },
+  { "name":"Marta", "surname": "Moyano",
+    "birthdate": "1988-11-19" }
+]}

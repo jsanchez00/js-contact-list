@@ -1,0 +1,64 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../js-person/js-person.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+<dom-module id="js-contact-list">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <template is="dom-if" if="{{_anyData()}}">
+      <iron-ajax url="/people.json"
+                 handle-as="json"
+                 last-response="{{json}}" auto>
+      </iron-ajax>
+    </template>
+
+    <template is="dom-repeat" items="[[json.people]]" as="person">
+      <js-person name="[[person.name]]"
+                 surname="[[person.surname]]"
+                 second-surname="[[person.secondSurname]]"
+                 birthdate="[[person.birthdate]]"></js-person>
+    </template>
+
+  </template>
+
+  <script>
+    /**
+     * `js-contact-list`
+     * People contact list
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class JsContactList extends Polymer.Element {
+      static get is() { return 'js-contact-list'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'js-contact-list'
+          },
+          json: {
+            type:  Object,
+            value: {"people": [{}, {}, {}]}
+          },
+          withData: {
+            type: Boolean,
+            value: false
+          }
+        };
+      }
+      _anyData() {
+        if (this.withData == true)  return true
+        else                        return false
+      }
+    }
+
+    window.customElements.define(JsContactList.is, JsContactList);
+  </script>
+</dom-module>
